@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 
+
+
 const ButtonEditTodo = (props) => (
 	<button
 		onClick={(e) => {
@@ -11,13 +13,15 @@ const ButtonEditTodo = (props) => (
 			}}
 		className={"button_left"}
 	>
-		{//BUTTON TEXT
-			props.status ? 
+		{ // BUTTON TEXT
+			props.status ?
 				"VALIDATE"
 			:
 				"EDIT"
 		}
 	</button>
 );
+
+
 
 export default ButtonEditTodo;

@@ -1,7 +1,17 @@
 {
-  "name": "basic-redux-count",
-  "version": "0.1.0",
+  "name": "react-project-to-do-list",
+  "version": "1.2.0",
+  "description": "A local to do list, based on React / Redux",
   "private": true,
+  "keywords": [
+    "react",
+    "redux"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AGenson/react-project-to-do-list.git"
+  },
+  "author": "Anthony Genson",
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

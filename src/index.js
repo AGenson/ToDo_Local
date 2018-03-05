@@ -10,24 +10,16 @@ import {
 
 import configureStore from './services';
 
-/*
-	The store is initialize during the reconnect workflow
-	You can find this workflow insde the workflow folder/login
-	Called on each route to check user context
-*/
+
+
 const store = configureStore({});
-
-
-/*
-	First thing first
-	npm install --save redux react-redux
-*/
 
 const Application = (props) => (
 	<Provider store={store}>
 		<App/>
 	</Provider>
 )
+
 
 
 ReactDOM.render(<Application />, document.getElementById('root'));

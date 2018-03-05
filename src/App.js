@@ -13,6 +13,8 @@ import { count_increment, count_decrement } from "./services/count/actions";
 import { todos_add_todo, todos_edit_todo, todos_check_todo, todos_remove_todo, todos_change_filter } from "./services/todos/actions";
 import todos_filter from "./services/todos/selector";
 
+
+
 class App extends Component {
 
 	state = {
@@ -78,6 +80,7 @@ class App extends Component {
 	_onChange_text_edit(e) {
 		var edit = this.state.edit;
 		edit.text_edit = e.target.value;
+
 		if (e.target.value.length < 37){
 			this.setState({
 				edit: edit
@@ -86,7 +89,16 @@ class App extends Component {
 	}
 
 	_onValid_text_edit(){
-		this.props.todos_edit_todo({ id: this.state.edit.id_edit, text: this.state.edit.text_edit })
+		this.props.todos_edit_todo({ id: this.state.edit.id_edit, text: this.state.edit.text_edit });
+		this._reset_edit();
+	}
+
+	_onChange_filter(filter){
+		this.props.todos_change_filter(filter);
+		this._reset_edit();
+	}
+
+	_reset_edit(){
 		var init_edit = {
 			status_edit: false,
 			id_edit: "",
@@ -120,7 +132,7 @@ class App extends Component {
 						<li>
 							<FilterForm
 								filter={this.props.todos.filter}
-								changeFilter={this.props.todos_change_filter}
+								changeFilter={this._onChange_filter.bind(this)}
 							/>
 						</li>
 						{

@@ -6,9 +6,11 @@ import ButtonRemoveTodo from "./ButtonRemoveTodo";
 import CheckToDo from "./CheckToDo";
 import ToDo from "./ToDo";
 
+
+
 const ToDoDisplay = (props) => (
 	<li className="resp">
-		
+
 		<ButtonEditTodo
 			status={props.status_edit === true && props.id === props.id_edit}
 			index={props.index}
@@ -41,5 +43,7 @@ const ToDoDisplay = (props) => (
 
 	</li>
 );
+
+
 
 export default ToDoDisplay;
