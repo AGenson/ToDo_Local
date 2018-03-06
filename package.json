@@ -1,5 +1,5 @@
 {
-  "name": "react-project-to-do-list",
+  "name": "react-project-to-do-list-local",
   "version": "1.2.0",
   "description": "A local to do list, based on React / Redux",
   "private": true,
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:AGenson/react-project-to-do-list.git"
+    "url": "git@github.com:AGenson/react-project-to-do-list-local.git"
   },
   "author": "Anthony Genson",
   "dependencies": {

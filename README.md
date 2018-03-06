@@ -1,8 +1,10 @@
 ![sdf](./readme.png)
 
-# react-project-web-store
+# react-project-to-do-list-local
 
 Web project based on React / Redux, to create a basic to do list.
+
+This is a local version, there is no storage.
 
 **This project is based on [react](https://github.com/facebook/react), using:**
 - [redux](https://github.com/reactjs/redux)
@@ -13,7 +15,7 @@ First time using redux, here's a small react project consisting on creating a ba
 
 This is only a static website developement. It is not connected to any data storage, it just simulates one.
 
-Here's the website instance, thanks to [surge](http://surge.sh/) (free static web publishing): [http://react-project-to-do-list.surge.sh](http://react-project-to-do-list.surge.sh)
+Here's the website instance, thanks to [surge](http://surge.sh/) (free static web publishing): [http://react-project-to-do-list-local.surge.sh](http://react-project-to-do-list-local.surge.sh)
 
 # Features
 
