@@ -9,7 +9,7 @@ const ButtonEditTodo = (props) => (
 			props.status ?
 					props.onValidText()
 				:
-					props.onStartEdit(e, props.id);
+					props.onStartEdit(e, props.id, props.name);
 			}}
 		className={"button_left"}
 	>

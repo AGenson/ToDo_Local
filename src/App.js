@@ -12,6 +12,7 @@ import ToDoDisplay from "./components/ToDoDisplay";
 import { count_increment, count_decrement } from "./services/count/actions";
 import { todos_add_todo, todos_edit_todo, todos_check_todo, todos_remove_todo, todos_change_filter } from "./services/todos/actions";
 import todos_filter from "./services/todos/selector";
+import { TODOS_FILTER_COMPLETED } from "./services/todos/constants";
 
 
 
@@ -62,18 +63,13 @@ class App extends Component {
 		}
 	}
 
-	_onStart_text_edit(e, id) {
+	_onStart_text_edit(e, id, name) {
 		if (this.state.edit.status_edit === false){
-			var edit_init = {};
-
-			this.props.items.forEach( (item) => {
-				if (item.id === id)
-					edit_init = {
-						status_edit: true,
-						id_edit: id,
-						text_edit: item.name
-					};
-			});
+			var edit_init = {
+				status_edit: true,
+				id_edit: id,
+				text_edit: name
+			};
 
 			this.setState({
 				edit: edit_init
@@ -117,17 +113,20 @@ class App extends Component {
 		});
 	}
 
-	_onCheck_todo(id){
-		this.props.items.forEach( (item) => {
-			if (item.id === id){
-				if (item.completed === true)
-					this.props.count_increment();
-				else
-					this.props.count_decrement();
-			}
-		});
+	_onCheck(id, completed){
+		if (completed === true)
+			this.props.count_increment();
+		else
+			this.props.count_decrement();
 
 		this.props.todos_check_todo(id);
+	}
+
+	_onRemove(id, completed){
+		this.props.todos_remove_todo(id);
+
+		if (completed === false)
+			this.props.count_decrement();
 	}
 
 	render() {
@@ -152,15 +151,20 @@ class App extends Component {
 					<ul>
 						<li>
 							<FilterForm
-								filter={this.props.todos.filter}
+								filter={this.props.filter}
 								changeFilter={this._onChange_filter.bind(this)}
 							/>
 						</li>
 						{
-							this.props.count_value === 0 ?
-								<div id="no_todo">
-									Great ! There's nothing to do !
-								</div>
+							this.props.items.length === 0 ?
+								this.props.filter === TODOS_FILTER_COMPLETED ?
+									<div id="no_todo">
+										Sorry mate ! Nothing is completed !
+									</div>
+								:
+									<div id="no_todo">
+										Great ! There's nothing to do !
+									</div>
 							:
 								this.props.items.map((item, i) => {
 									return (
@@ -173,11 +177,8 @@ class App extends Component {
 											onStartEdit={this._onStart_text_edit.bind(this)}
 											onChangeText={this._onChange_text_edit.bind(this)}
 											onValidText={this._onValid_text_edit.bind(this)}
-											changeStateToDo={this._onCheck_todo.bind(this)}
-											removeToDo={() => {
-												this.props.todos_remove_todo(item.id);
-												this.props.count_decrement();
-											}}
+											changeStateToDo={this._onCheck.bind(this)}
+											removeToDo={ () => this._onRemove(item.id, item.completed) }
 										/>
 									);
 								})
@@ -192,7 +193,7 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => ({
-	todos: state.todos,
+	filter: state.todos.filter,
 	items: todos_filter(state),
 	count_value: state.count.value
 });

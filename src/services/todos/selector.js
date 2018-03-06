@@ -4,6 +4,7 @@ import * as types from "./constants";
 export default function todos_filter(state)
 {
 	var {items} = state.todos;
+
 	switch (state.todos.filter) {
 
 		case types.TODOS_FILTER_ALL:

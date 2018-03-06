@@ -13,7 +13,7 @@ const ToDoForm = (props) => (
 				}
 			}}
 			type="text"
-			placeholder="Entrez une tâche"
+			placeholder="Enter a task"
 			value={props.text}
 			id="input_create_todo"
 		/>

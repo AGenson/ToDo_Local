@@ -10,10 +10,12 @@ const initialState = {
 export default function reducer(state = initialState, action)
 {
 	var {items} = state;
+	var todo = {};
+
 	switch (action.type) {
 
 		case types.TODOS_ADD_TODO:
-			var todo = {
+			todo = {
 				id: Date.now(),
 				name: action.payload.text,
 				completed: false
@@ -60,8 +62,6 @@ export default function reducer(state = initialState, action)
 			};
 
 		case types.TODOS_REMOVE_TODO:
-			var todo = {};
-
 			items.forEach( (item, i, arr) => {
 				if (item.id === action.payload){
 					todo = item;

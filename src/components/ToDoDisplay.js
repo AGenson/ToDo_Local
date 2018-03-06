@@ -14,6 +14,7 @@ const ToDoDisplay = (props) => (
 		<ButtonEditTodo
 			status={props.status_edit === true && props.id === props.id_edit}
 			id={props.id}
+			name={props.name}
 			onValidText={props.onValidText}
 			onStartEdit={props.onStartEdit}
 		/>
@@ -32,7 +33,7 @@ const ToDoDisplay = (props) => (
 			completed={props.completed}
 			status_edit={props.status_edit}
 			changeStateToDo={() => {
-				props.changeStateToDo(props.id);
+				props.changeStateToDo(props.id, props.completed);
 			}}
 		/>
 
