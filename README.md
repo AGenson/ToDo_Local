@@ -5,7 +5,6 @@
 Web project based on React / Redux, to create a basic to do list.
 
 **This project is based on [react](https://github.com/facebook/react), using:**
-- [react-router](https://github.com/ReactTraining/react-router)
 - [redux](https://github.com/reactjs/redux)
 
 # Description
