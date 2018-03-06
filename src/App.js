@@ -28,10 +28,11 @@ class App extends Component {
 
 	componentDidMount() {
 		this.interval = setInterval(() => {
-			this.props.items.forEach((elt, i) => {
-				var input = document.getElementById("check-"+i);
+			this.props.items.forEach((item) => {
+				var input = document.getElementById("check-"+item.id);
+
 				if (input !== null){
-					document.getElementById("check-"+i).checked = elt.completed;
+					document.getElementById("check-"+item.id).checked = item.completed;
 				}
 			});
 		}, 500);
@@ -53,7 +54,7 @@ class App extends Component {
 
 	_onValid_text_create(){
 		if (this.state.text_create.length > 0){
-			this.props.todos_add_todo({ text: this.state.text_create })
+			this.props.todos_add_todo({ text: this.state.text_create });
 			this.setState({
 				text_create: ""
 			});
@@ -61,13 +62,19 @@ class App extends Component {
 		}
 	}
 
-	_onStart_text_edit(e, index) {
+	_onStart_text_edit(e, id) {
 		if (this.state.edit.status_edit === false){
-			var edit_init = {
-				status_edit: true,
-				id_edit: this.props.todos.items[index].id,
-				text_edit: this.props.todos.items[index].name
-			};
+			var edit_init = {};
+
+			this.props.items.forEach( (item) => {
+				if (item.id === id)
+					edit_init = {
+						status_edit: true,
+						id_edit: id,
+						text_edit: item.name
+					};
+			});
+
 			this.setState({
 				edit: edit_init
 			});
@@ -104,9 +111,23 @@ class App extends Component {
 			id_edit: "",
 			text_edit: ""
 		};
+
 		this.setState({
 			edit: init_edit
 		});
+	}
+
+	_onCheck_todo(id){
+		this.props.items.forEach( (item) => {
+			if (item.id === id){
+				if (item.completed === true)
+					this.props.count_increment();
+				else
+					this.props.count_decrement();
+			}
+		});
+
+		this.props.todos_check_todo(id);
 	}
 
 	render() {
@@ -152,9 +173,9 @@ class App extends Component {
 											onStartEdit={this._onStart_text_edit.bind(this)}
 											onChangeText={this._onChange_text_edit.bind(this)}
 											onValidText={this._onValid_text_edit.bind(this)}
-											changeStateToDo={this.props.todos_check_todo}
+											changeStateToDo={this._onCheck_todo.bind(this)}
 											removeToDo={() => {
-												this.props.todos_remove_todo(i);
+												this.props.todos_remove_todo(item.id);
 												this.props.count_decrement();
 											}}
 										/>

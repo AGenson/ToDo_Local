@@ -33,6 +33,7 @@ export default function reducer(state = initialState, action)
 					elt.name = action.payload.text;
 					console.log(types.TODOS_EDIT_TODO, " - ", elt);
 				}
+
 				return elt;
 			});
 
@@ -42,8 +43,16 @@ export default function reducer(state = initialState, action)
 			};
 
 		case types.TODOS_CHECK_TODO:
-			items[action.payload].completed = items[action.payload].completed ? false : true;
-			console.log(types.TODOS_CHECK_TODO, " - ", items[action.payload]);
+			var index = -1;
+
+			items.forEach( (item, i, arr) => {
+				if (item.id === action.payload){
+					arr[i].completed = !item.completed;
+					index = i;
+				}
+			});
+
+			console.log(types.TODOS_CHECK_TODO, " - ", items[index]);
 
 			return {
 				...state,
@@ -51,8 +60,16 @@ export default function reducer(state = initialState, action)
 			};
 
 		case types.TODOS_REMOVE_TODO:
-			console.log(types.TODOS_REMOVE_TODO, " - ", items[action.payload]);
-			items.splice(action.payload, 1);
+			var todo = {};
+
+			items.forEach( (item, i, arr) => {
+				if (item.id === action.payload){
+					todo = item;
+					arr.splice(i, 1);
+				}
+			});
+
+			console.log(types.TODOS_REMOVE_TODO, " - ", todo);
 
 			return {
 				...state,
@@ -75,4 +92,3 @@ export default function reducer(state = initialState, action)
 
 	}
 };
-

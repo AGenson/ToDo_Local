@@ -13,7 +13,7 @@ const ToDoDisplay = (props) => (
 
 		<ButtonEditTodo
 			status={props.status_edit === true && props.id === props.id_edit}
-			index={props.index}
+			id={props.id}
 			onValidText={props.onValidText}
 			onStartEdit={props.onStartEdit}
 		/>
@@ -28,11 +28,11 @@ const ToDoDisplay = (props) => (
 		/>
 
 		<CheckToDo
-			index={props.index}
+			id={props.id}
 			completed={props.completed}
 			status_edit={props.status_edit}
 			changeStateToDo={() => {
-				props.changeStateToDo(props.index);
+				props.changeStateToDo(props.id);
 			}}
 		/>
 

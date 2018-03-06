@@ -8,8 +8,8 @@ const CheckToDo = (props) => {
 		<div className="div_check">
 			<input
 				type="checkbox"
-				id={"check-"+props.index}
-				name={"check-"+props.index}
+				id={"check-"+props.id}
+				name={"check-"+props.id}
 				disabled
 			/>
 			<label
